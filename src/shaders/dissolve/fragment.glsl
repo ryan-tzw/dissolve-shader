@@ -2,7 +2,8 @@ uniform float uSliceStart;
 uniform float uSliceArc;
 uniform float uTime;
 uniform sampler2D uPerlinTexture;
-uniform vec3 uDissolveColor;
+uniform vec3 uEdgeColor;
+uniform vec3 uMiddleColor;
 uniform float uAnimationSpeed;
 uniform float uNoiseFrequency;
 

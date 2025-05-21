@@ -20,7 +20,8 @@ export default function Experience() {
     const planeRef = useRef(null)
 
     const debug = useControls({
-        dissolveEdgeColor: '#FFA600',
+        edgeColor: '#FFA600',
+        middleColor: '#FFFFFF',
         animationSpeed: { value: 1.2, min: 0, max: 3, step: 0.01 },
         noiseFrequency: { value: 1.7, min: 0, max: 10, step: 0.01 },
     })
@@ -30,14 +31,16 @@ export default function Experience() {
      */
     const uniforms = {
         uTime: { value: 0 },
-        uDissolveColor: { value: new THREE.Color(debug.dissolveEdgeColor) },
-        uAnimationSpeed: { value: 1.2 },
-        uNoiseFrequency: { value: 1.7 },
+        uEdgeColor: { value: new THREE.Color(debug.dissolveEdgeColor) },
+        uMiddleColor: { value: new THREE.Color(debug.dissolveMiddleColor) },
+        uAnimationSpeed: { value: debug.animationSpeed },
+        uNoiseFrequency: { value: debug.noiseFrequency },
     }
 
     useEffect(() => {
         if (shaderMaterialRef.current) {
-            shaderMaterialRef.current.uniforms.uDissolveColor.value.set(debug.dissolveEdgeColor)
+            shaderMaterialRef.current.uniforms.uEdgeColor.value.set(debug.edgeColor)
+            shaderMaterialRef.current.uniforms.uMiddleColor.value.set(debug.middleColor)
             shaderMaterialRef.current.uniforms.uAnimationSpeed.value = debug.animationSpeed
             shaderMaterialRef.current.uniforms.uNoiseFrequency.value = debug.noiseFrequency
         }
