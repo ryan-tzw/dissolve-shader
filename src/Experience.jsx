@@ -1,12 +1,13 @@
 import * as THREE from 'three'
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState, useMemo } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, OrbitControls } from '@react-three/drei'
 import CustomShaderMaterial from 'three-custom-shader-material'
+import { useControls } from 'leva'
 import vertexShader from './shaders/dissolve/vertex.glsl'
 import fragmentShader from './shaders/dissolve/fragment.glsl'
 import dissolvePatchmap from './shaders/dissolve/patchmap.glsl'
-import { useControls } from 'leva'
+import { SelectiveBloom } from '@react-three/postprocessing'
 
 const patchmap = {
     csm_Dissolve: {
@@ -15,6 +16,7 @@ const patchmap = {
 }
 
 export default function Experience() {
+    const sphereRef = useRef(null)
     const shaderMaterialRef = useRef(null)
     const depthMaterialRef = useRef(null)
     const planeRef = useRef(null)
@@ -63,8 +65,14 @@ export default function Experience() {
     return (
         <>
             <OrbitControls />
-            <Environment preset="sunset" background backgroundBlurriness={0.5} />
-            <mesh castShadow receiveShadow>
+            <Environment
+                preset="night"
+                background
+                backgroundBlurriness={0.5}
+                backgroundIntensity={0.1}
+                environmentIntensity={0.8}
+            />
+            <mesh ref={sphereRef} castShadow receiveShadow>
                 <sphereGeometry />
                 <CustomShaderMaterial
                     ref={shaderMaterialRef}
@@ -75,7 +83,7 @@ export default function Experience() {
                     patchMap={patchmap}
                     metalness={0.5}
                     roughness={0.25}
-                    envMapIntensity={0.5}
+                    envMapIntensity={0.0}
                     side={THREE.DoubleSide}
                 />
                 <CustomShaderMaterial
@@ -95,14 +103,14 @@ export default function Experience() {
                 <meshStandardMaterial
                     color="#aaaaaa"
                     side={THREE.DoubleSide}
-                    metalness={0.5}
-                    roughness={0.25}
+                    metalness={0.2}
+                    roughness={0.3}
                     envMapIntensity={0.5}
                 />
             </mesh>
 
             <directionalLight
-                args={[0xffffff, 4]}
+                args={[0xffffff, 0.1]}
                 position={[6.25, 3, 4]}
                 castShadow
                 shadow-mapSize-width={1024}
@@ -115,6 +123,14 @@ export default function Experience() {
                 shadow-camera-left={-8}
                 shadow-camera-bottom={-8}
             />
+
+            {/* <SelectiveBloom
+                lights={[]}
+                selection={[sphereRef]}
+                intensity={intensity}
+                luminanceThreshold={threshold}
+                luminanceSmoothing={smoothing}
+            /> */}
         </>
     )
 }

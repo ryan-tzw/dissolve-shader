@@ -27,9 +27,9 @@ void main() {
     // Colour the edges differently
     float edgeWidth = 0.2;
 
-    // split the edge into 3: 10%, 80%, 10%
+    // split the edge into 3: 15%, 70%, 15%
     float diff = abs(noise - threshold);
-    float edgeThreshold = 0.1 * edgeWidth;
+    float edgeThreshold = 0.15 * edgeWidth;
 
     if(noise < threshold) {
         discard;
