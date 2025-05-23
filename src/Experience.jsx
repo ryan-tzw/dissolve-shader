@@ -107,27 +107,30 @@ export default function Experience() {
                 value: customColors.edgeColor,
                 onChange: (color) => {
                     setCustomColors((prev) => ({ ...prev, edgeColor: color }))
-                    setColorControls({ preset: getMatchingPreset(color, customColors.middleColor) })
                 },
             },
             middleColor: {
                 value: customColors.middleColor,
                 onChange: (color) => {
                     setCustomColors((prev) => ({ ...prev, middleColor: color }))
-                    setColorControls({ preset: getMatchingPreset(customColors.edgeColor, color) })
                 },
             },
         }),
     }))
 
-    // Update the shader uniforms when color controls change
     useEffect(() => {
+        // Update the preset text
+        setColorControls({
+            preset: getMatchingPreset(customColors.edgeColor, customColors.middleColor),
+        })
+
+        // Update the shader uniforms when color controls change
         if (shaderMaterialRef.current) {
             const shaderUniforms = shaderMaterialRef.current.uniforms
             shaderUniforms.uEdgeColor.value.set(customColors.edgeColor)
             shaderUniforms.uMiddleColor.value.set(customColors.middleColor)
         }
-    }, [customColors])
+    }, [customColors, setColorControls])
 
     /**
      * Custom dissolve shader material
