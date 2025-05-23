@@ -19,10 +19,8 @@ void main() {
     // Normalise position for noise
     vec3 nPosition = normalize(vPosition);
     float noise = snoise(nPosition * uNoiseFrequency); // ranges from -1 to 1
-    // noise = (noise + 1.0) / 2.0; // Normalise to 0-1
 
     float threshold = sin(uTime * uAnimationSpeed - PI) * 1.5;
-    // threshold = 0.0; // pause for testing
 
     // Colour the edges differently
     float edgeWidth = 0.2;
