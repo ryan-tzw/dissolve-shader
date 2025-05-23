@@ -16,9 +16,13 @@ const patchmap = {
 }
 
 const COLOR_PRESETS = {
-    default: {
-        edgeColor: '#eb5a39',
-        middleColor: '#f2c7b4',
+    purple: {
+        edgeColor: '#800080',
+        middleColor: '#d994f8',
+    },
+    yellow: {
+        edgeColor: '#aa911c',
+        middleColor: '#d5c381',
     },
     red: {
         edgeColor: '#ff2b2b',
@@ -31,10 +35,6 @@ const COLOR_PRESETS = {
     blue: {
         edgeColor: '#1427d5',
         middleColor: '#80c6ff',
-    },
-    purple: {
-        edgeColor: '#800080',
-        middleColor: '#d994f8',
     },
     orange: {
         edgeColor: '#ff7e30',
@@ -73,7 +73,7 @@ export default function Experience() {
      */
     // Effect controls
     const effectControls = useControls('Effect', {
-        animationSpeed: { value: 1.2, min: 0, max: 3, step: 0.01 },
+        animationSpeed: { value: 1.4, min: 0, max: 3, step: 0.01 },
         noiseFrequency: { value: 1.6, min: 0.5, max: 4, step: 0.01 },
     })
     // Update the shader uniforms when the effect controls change
@@ -87,8 +87,8 @@ export default function Experience() {
 
     // Color controls
     const [customColors, setCustomColors] = useState({
-        edgeColor: COLOR_PRESETS.default.edgeColor,
-        middleColor: COLOR_PRESETS.default.middleColor,
+        edgeColor: COLOR_PRESETS.purple.edgeColor,
+        middleColor: COLOR_PRESETS.purple.middleColor,
     })
 
     // Use leva controls to update the colors state
@@ -96,7 +96,7 @@ export default function Experience() {
         Colors: folder({
             preset: {
                 options: Object.keys(COLOR_PRESETS),
-                value: 'default',
+                value: 'purple',
                 onChange: (preset) => {
                     if (preset === 'custom') return
                     const { edgeColor, middleColor } = COLOR_PRESETS[preset]

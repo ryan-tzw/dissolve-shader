@@ -20,7 +20,7 @@ void main() {
     vec3 nPosition = normalize(vPosition);
     float noise = snoise(nPosition * uNoiseFrequency); // ranges from -1 to 1
 
-    float threshold = sin(uTime * uAnimationSpeed - PI) * 1.5;
+    float threshold = sin(uTime * uAnimationSpeed - PI) * 1.4;
 
     // Colour the edges differently
     float edgeWidth = 0.2;
