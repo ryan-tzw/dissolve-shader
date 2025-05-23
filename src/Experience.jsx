@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { useEffect, useLayoutEffect, useRef, useState, useMemo } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Environment, OrbitControls } from '@react-three/drei'
 import CustomShaderMaterial from 'three-custom-shader-material'
