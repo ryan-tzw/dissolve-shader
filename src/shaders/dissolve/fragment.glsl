@@ -1,21 +1,14 @@
-uniform float uSliceStart;
-uniform float uSliceArc;
 uniform float uTime;
-uniform sampler2D uPerlinTexture;
 uniform vec3 uEdgeColor;
 uniform vec3 uMiddleColor;
 uniform float uAnimationSpeed;
 uniform float uNoiseFrequency;
 
 varying vec3 vPosition;
-varying vec2 vUv;
 
 #include ../includes/simplex3D.glsl
 
 void main() {
-    // Perlin
-    float perlin = texture(uPerlinTexture, vUv).r;
-
     // Normalise position for noise
     vec3 nPosition = normalize(vPosition);
     float noise = snoise(nPosition * uNoiseFrequency); // ranges from -1 to 1

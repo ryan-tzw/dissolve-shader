@@ -21,11 +21,11 @@ export default function Experience() {
     const depthMaterialRef = useRef(null)
     const planeRef = useRef(null)
 
-    const debug = useControls({
-        edgeColor: '#FFA600',
-        middleColor: '#FFFFFF',
-        animationSpeed: { value: 1.2, min: 0, max: 3, step: 0.01 },
-        noiseFrequency: { value: 1.7, min: 0, max: 10, step: 0.01 },
+    const debug = useControls('Effect', {
+        edgeColor: '#800080',
+        middleColor: '#d994f8',
+        animationSpeed: { value: 1.4, min: 0, max: 3, step: 0.01 },
+        noiseFrequency: { value: 1.6, min: 0, max: 10, step: 0.01 },
     })
 
     /**
